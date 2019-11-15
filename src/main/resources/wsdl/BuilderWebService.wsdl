@@ -1,0 +1,707 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://ws.polarion.com/BuilderWebService" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://ws.polarion.com/BuilderWebService" xmlns:intf="http://ws.polarion.com/BuilderWebService" xmlns:tns1="http://ws.polarion.com/BuilderWebService-impl" xmlns:tns2="http://ws.polarion.com/BuilderWebService-types" xmlns:tns3="http://ws.polarion.com/ProjectWebService-types" xmlns:tns4="http://ws.polarion.com/types" xmlns:tns5="http://ws.polarion.com/TrackerWebService-types" xmlns:tns6="http://ws.polarion.com/PlanningWebService-types" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://ws.polarion.com/BuilderWebService-impl" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://ws.polarion.com/TrackerWebService-types"/>
+   <import namespace="http://ws.polarion.com/ProjectWebService-types"/>
+   <import namespace="http://ws.polarion.com/BuilderWebService-types"/>
+   <import namespace="http://ws.polarion.com/PlanningWebService-types"/>
+   <import namespace="http://ws.polarion.com/types"/>
+   <element name="getAllBuilds">
+    <complexType/>
+   </element>
+   <element name="getAllBuildsResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="getAllBuildsReturn" type="tns2:Build"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getBuilds">
+    <complexType>
+     <sequence>
+      <element name="project" type="tns3:Project"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getBuildsResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="getBuildsReturn" type="tns2:Build"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="queryBuilds">
+    <complexType>
+     <sequence>
+      <element name="project" type="tns3:Project"/>
+      <element name="query" type="xsd:string"/>
+      <element name="sort" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="queryBuildsResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="queryBuildsReturn" type="tns2:Build"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://ws.polarion.com/types" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://ws.polarion.com/TrackerWebService-types"/>
+   <import namespace="http://ws.polarion.com/ProjectWebService-types"/>
+   <import namespace="http://ws.polarion.com/BuilderWebService-types"/>
+   <import namespace="http://ws.polarion.com/PlanningWebService-types"/>
+   <complexType name="Text">
+    <sequence>
+     <element name="type" type="xsd:string"/>
+     <element name="content" type="xsd:string"/>
+     <element name="contentLossy" type="xsd:boolean"/>
+    </sequence>
+   </complexType>
+   <simpleType name="SubterraURI">
+    <restriction base="xsd:string"/>
+   </simpleType>
+   <complexType name="ArrayOfSubterraURI">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="SubterraURI" type="tns4:SubterraURI"/>
+    </sequence>
+   </complexType>
+   <simpleType name="Location">
+    <restriction base="xsd:string"/>
+   </simpleType>
+   <complexType name="ArrayOfstring">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="string" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <simpleType name="duration">
+    <restriction base="xsd:string"/>
+   </simpleType>
+   <complexType name="Revision">
+    <sequence>
+     <element maxOccurs="1" minOccurs="0" name="author" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="created" type="xsd:dateTime"/>
+     <element maxOccurs="1" minOccurs="0" name="internalCommit" type="xsd:boolean"/>
+     <element maxOccurs="1" minOccurs="0" name="linkedWorkItemURIs" type="tns4:ArrayOfSubterraURI"/>
+     <element maxOccurs="1" minOccurs="0" name="message" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="name" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="repositoryName" type="xsd:string"/>
+    </sequence>
+    <attribute name="uri" type="tns4:SubterraURI"/>
+    <attribute name="unresolvable" type="xsd:boolean"/>
+   </complexType>
+   <complexType name="ArrayOfRevision">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="Revision" type="tns4:Revision"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOfLocation">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="Location" type="tns4:Location"/>
+    </sequence>
+   </complexType>
+   <complexType name="property">
+    <sequence>
+     <element name="key" nillable="false" type="xsd:string"/>
+     <element name="value" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="Properties">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="property" type="tns4:property"/>
+    </sequence>
+   </complexType>
+   <simpleType name="Currency">
+    <restriction base="xsd:decimal">
+     <fractionDigits value="2"/>
+    </restriction>
+   </simpleType>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://ws.polarion.com/ProjectWebService-types" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://ws.polarion.com/TrackerWebService-types"/>
+   <import namespace="http://ws.polarion.com/BuilderWebService-types"/>
+   <import namespace="http://ws.polarion.com/PlanningWebService-types"/>
+   <import namespace="http://ws.polarion.com/types"/>
+   <complexType name="User">
+    <sequence>
+     <element maxOccurs="1" minOccurs="0" name="description" type="tns4:Text"/>
+     <element maxOccurs="1" minOccurs="0" name="disabledNotifications" type="xsd:boolean"/>
+     <element maxOccurs="1" minOccurs="0" name="email" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="homePageContent" type="tns4:Text"/>
+     <element maxOccurs="1" minOccurs="0" name="id" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="name" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="voteURIs" type="tns4:ArrayOfSubterraURI"/>
+     <element maxOccurs="1" minOccurs="0" name="watcheURIs" type="tns4:ArrayOfSubterraURI"/>
+    </sequence>
+    <attribute name="uri" type="tns4:SubterraURI"/>
+    <attribute name="unresolvable" type="xsd:boolean"/>
+   </complexType>
+   <complexType name="ArrayOfUser">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="User" type="tns3:User"/>
+    </sequence>
+   </complexType>
+   <complexType name="Project">
+    <sequence>
+     <element maxOccurs="1" minOccurs="0" name="active" type="xsd:boolean"/>
+     <element maxOccurs="1" minOccurs="0" name="description" type="tns4:Text"/>
+     <element maxOccurs="1" minOccurs="0" name="finish" type="xsd:date"/>
+     <element maxOccurs="1" minOccurs="0" name="id" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="lead" type="tns3:User"/>
+     <element maxOccurs="1" minOccurs="0" name="location" type="tns4:Location"/>
+     <element maxOccurs="1" minOccurs="0" name="lockWorkRecordsDate" type="xsd:date"/>
+     <element maxOccurs="1" minOccurs="0" name="name" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="projectGroupURI" type="tns4:SubterraURI"/>
+     <element maxOccurs="1" minOccurs="0" name="start" type="xsd:date"/>
+     <element maxOccurs="1" minOccurs="0" name="trackerPrefix" type="xsd:string"/>
+    </sequence>
+    <attribute name="uri" type="tns4:SubterraURI"/>
+    <attribute name="unresolvable" type="xsd:boolean"/>
+   </complexType>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://ws.polarion.com/BuilderWebService-types" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://ws.polarion.com/TrackerWebService-types"/>
+   <import namespace="http://ws.polarion.com/ProjectWebService-types"/>
+   <import namespace="http://ws.polarion.com/PlanningWebService-types"/>
+   <import namespace="http://ws.polarion.com/types"/>
+   <complexType name="BuildTestResults">
+    <sequence>
+     <element maxOccurs="1" minOccurs="0" name="errorCount" type="xsd:int"/>
+     <element maxOccurs="1" minOccurs="0" name="failureCount" type="xsd:int"/>
+     <element maxOccurs="1" minOccurs="0" name="skippedCount" type="xsd:int"/>
+     <element maxOccurs="1" minOccurs="0" name="testCount" type="xsd:int"/>
+    </sequence>
+   </complexType>
+   <complexType name="BuildLinkedWorkItem">
+    <sequence>
+     <element maxOccurs="1" minOccurs="0" name="revision" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="role" type="tns5:EnumOptionId"/>
+     <element maxOccurs="1" minOccurs="0" name="workItem" type="tns5:WorkItem"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOfBuildLinkedWorkItem">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="BuildLinkedWorkItem" type="tns2:BuildLinkedWorkItem"/>
+    </sequence>
+   </complexType>
+   <complexType name="Build">
+    <sequence>
+     <element maxOccurs="1" minOccurs="0" name="author" type="tns3:User"/>
+     <element maxOccurs="1" minOccurs="0" name="birLocation" type="tns4:Location"/>
+     <element maxOccurs="1" minOccurs="0" name="buildDescriptorName" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="buildStamp" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="buildStatus" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="buildTag" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="buildTestResults" type="tns2:BuildTestResults"/>
+     <element maxOccurs="1" minOccurs="0" name="calculationDescriptorName" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="creationTime" type="xsd:dateTime"/>
+     <element maxOccurs="1" minOccurs="0" name="finishTime" type="xsd:dateTime"/>
+     <element maxOccurs="1" minOccurs="0" name="id" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="jobId" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="linkedWorkItems" type="tns2:ArrayOfBuildLinkedWorkItem"/>
+     <element maxOccurs="1" minOccurs="0" name="localDeploymentSpaceName" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="logFiles" type="tns4:ArrayOfLocation"/>
+     <element maxOccurs="1" minOccurs="0" name="startTime" type="xsd:dateTime"/>
+    </sequence>
+    <attribute name="uri" type="tns4:SubterraURI"/>
+    <attribute name="unresolvable" type="xsd:boolean"/>
+   </complexType>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://ws.polarion.com/TrackerWebService-types" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://ws.polarion.com/ProjectWebService-types"/>
+   <import namespace="http://ws.polarion.com/BuilderWebService-types"/>
+   <import namespace="http://ws.polarion.com/PlanningWebService-types"/>
+   <import namespace="http://ws.polarion.com/types"/>
+   <complexType name="EnumOptionId">
+    <sequence>
+     <element name="id" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="Approval">
+    <sequence>
+     <element maxOccurs="1" minOccurs="0" name="secureApprovalCommentId" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="status" type="tns5:EnumOptionId"/>
+     <element maxOccurs="1" minOccurs="0" name="user" type="tns3:User"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOfApproval">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="Approval" type="tns5:Approval"/>
+    </sequence>
+   </complexType>
+   <complexType name="Attachment">
+    <sequence>
+     <element maxOccurs="1" minOccurs="0" name="author" type="tns3:User"/>
+     <element maxOccurs="1" minOccurs="0" name="fileName" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="id" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="length" type="xsd:long"/>
+     <element maxOccurs="1" minOccurs="0" name="title" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="updated" type="xsd:dateTime"/>
+     <element maxOccurs="1" minOccurs="0" name="url" type="xsd:string"/>
+    </sequence>
+    <attribute name="uri" type="tns4:SubterraURI"/>
+    <attribute name="unresolvable" type="xsd:boolean"/>
+   </complexType>
+   <complexType name="ArrayOfAttachment">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="Attachment" type="tns5:Attachment"/>
+    </sequence>
+   </complexType>
+   <complexType name="Category">
+    <sequence>
+     <element maxOccurs="1" minOccurs="0" name="description" type="tns4:Text"/>
+     <element maxOccurs="1" minOccurs="0" name="id" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="name" type="xsd:string"/>
+    </sequence>
+    <attribute name="uri" type="tns4:SubterraURI"/>
+    <attribute name="unresolvable" type="xsd:boolean"/>
+   </complexType>
+   <complexType name="ArrayOfCategory">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="Category" type="tns5:Category"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOfEnumOptionId">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="EnumOptionId" type="tns5:EnumOptionId"/>
+    </sequence>
+   </complexType>
+   <complexType name="Comment">
+    <sequence>
+     <element maxOccurs="1" minOccurs="0" name="author" type="tns3:User"/>
+     <element maxOccurs="1" minOccurs="0" name="childCommentURIs" type="tns4:ArrayOfSubterraURI"/>
+     <element maxOccurs="1" minOccurs="0" name="created" type="xsd:dateTime"/>
+     <element maxOccurs="1" minOccurs="0" name="id" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="parentCommentURI" type="tns4:SubterraURI"/>
+     <element maxOccurs="1" minOccurs="0" name="resolved" type="xsd:boolean"/>
+     <element maxOccurs="1" minOccurs="0" name="tags" type="tns5:ArrayOfEnumOptionId"/>
+     <element maxOccurs="1" minOccurs="0" name="text" type="tns4:Text"/>
+     <element maxOccurs="1" minOccurs="0" name="title" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="visibleTo" type="tns4:ArrayOfstring"/>
+    </sequence>
+    <attribute name="uri" type="tns4:SubterraURI"/>
+    <attribute name="unresolvable" type="xsd:boolean"/>
+   </complexType>
+   <complexType name="ArrayOfComment">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="Comment" type="tns5:Comment"/>
+    </sequence>
+   </complexType>
+   <complexType name="ExternallyLinkedWorkItem">
+    <sequence>
+     <element maxOccurs="1" minOccurs="0" name="role" type="tns5:EnumOptionId"/>
+     <element maxOccurs="1" minOccurs="0" name="workItemURI" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOfExternallyLinkedWorkItem">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="ExternallyLinkedWorkItem" type="tns5:ExternallyLinkedWorkItem"/>
+    </sequence>
+   </complexType>
+   <complexType name="Hyperlink">
+    <sequence>
+     <element maxOccurs="1" minOccurs="0" name="role" type="tns5:EnumOptionId"/>
+     <element maxOccurs="1" minOccurs="0" name="uri" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOfHyperlink">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="Hyperlink" type="tns5:Hyperlink"/>
+    </sequence>
+   </complexType>
+   <complexType name="LinkedOslcResource">
+    <sequence>
+     <element maxOccurs="1" minOccurs="0" name="label" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="role" type="tns5:EnumOptionId"/>
+     <element maxOccurs="1" minOccurs="0" name="uri" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOfLinkedOslcResource">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="LinkedOslcResource" type="tns5:LinkedOslcResource"/>
+    </sequence>
+   </complexType>
+   <complexType name="LinkedWorkItem">
+    <sequence>
+     <element maxOccurs="1" minOccurs="0" name="revision" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="role" type="tns5:EnumOptionId"/>
+     <element maxOccurs="1" minOccurs="0" name="suspect" type="xsd:boolean"/>
+     <element maxOccurs="1" minOccurs="0" name="workItemURI" type="tns4:SubterraURI"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOfLinkedWorkItem">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="LinkedWorkItem" type="tns5:LinkedWorkItem"/>
+    </sequence>
+   </complexType>
+   <complexType name="Custom">
+    <sequence>
+     <element name="key" type="xsd:string"/>
+     <element name="value" nillable="true"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOfCustom">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="Custom" type="tns5:Custom"/>
+    </sequence>
+   </complexType>
+   <complexType name="PlanningConstraint">
+    <sequence>
+     <element maxOccurs="1" minOccurs="0" name="constraint" type="tns5:EnumOptionId"/>
+     <element maxOccurs="1" minOccurs="0" name="date" type="xsd:dateTime"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOfPlanningConstraint">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="PlanningConstraint" type="tns5:PlanningConstraint"/>
+    </sequence>
+   </complexType>
+   <complexType name="PriorityOptionId">
+    <complexContent>
+     <extension base="tns5:EnumOptionId">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="TimePoint">
+    <sequence>
+     <element maxOccurs="1" minOccurs="0" name="closed" type="xsd:boolean"/>
+     <element maxOccurs="1" minOccurs="0" name="description" type="tns4:Text"/>
+     <element maxOccurs="1" minOccurs="0" name="earliestPlannedStart" type="xsd:date"/>
+     <element maxOccurs="1" minOccurs="0" name="id" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="name" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="time" type="xsd:date"/>
+    </sequence>
+    <attribute name="uri" type="tns4:SubterraURI"/>
+    <attribute name="unresolvable" type="xsd:boolean"/>
+   </complexType>
+   <complexType name="WorkRecord">
+    <sequence>
+     <element maxOccurs="1" minOccurs="0" name="comment" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="date" type="xsd:date"/>
+     <element maxOccurs="1" minOccurs="0" name="id" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="timeSpent" type="tns4:duration"/>
+     <element maxOccurs="1" minOccurs="0" name="type" type="tns5:EnumOptionId"/>
+     <element maxOccurs="1" minOccurs="0" name="user" type="tns3:User"/>
+    </sequence>
+    <attribute name="uri" type="tns4:SubterraURI"/>
+    <attribute name="unresolvable" type="xsd:boolean"/>
+   </complexType>
+   <complexType name="ArrayOfWorkRecord">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="WorkRecord" type="tns5:WorkRecord"/>
+    </sequence>
+   </complexType>
+   <complexType name="WorkItem">
+    <sequence>
+     <element maxOccurs="1" minOccurs="0" name="approvals" type="tns5:ArrayOfApproval"/>
+     <element maxOccurs="1" minOccurs="0" name="assignee" type="tns3:ArrayOfUser"/>
+     <element maxOccurs="1" minOccurs="0" name="attachments" type="tns5:ArrayOfAttachment"/>
+     <element maxOccurs="1" minOccurs="0" name="author" type="tns3:User"/>
+     <element maxOccurs="1" minOccurs="0" name="categories" type="tns5:ArrayOfCategory"/>
+     <element maxOccurs="1" minOccurs="0" name="comments" type="tns5:ArrayOfComment"/>
+     <element maxOccurs="1" minOccurs="0" name="created" type="xsd:dateTime"/>
+     <element maxOccurs="1" minOccurs="0" name="description" type="tns4:Text"/>
+     <element maxOccurs="1" minOccurs="0" name="dueDate" type="xsd:date"/>
+     <element maxOccurs="1" minOccurs="0" name="externallyLinkedWorkItems" type="tns5:ArrayOfExternallyLinkedWorkItem"/>
+     <element maxOccurs="1" minOccurs="0" name="hyperlinks" type="tns5:ArrayOfHyperlink"/>
+     <element maxOccurs="1" minOccurs="0" name="id" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="initialEstimate" type="tns4:duration"/>
+     <element maxOccurs="1" minOccurs="0" name="linkedOslcResources" type="tns5:ArrayOfLinkedOslcResource"/>
+     <element maxOccurs="1" minOccurs="0" name="linkedRevisions" type="tns4:ArrayOfRevision"/>
+     <element maxOccurs="1" minOccurs="0" name="linkedRevisionsDerived" type="tns4:ArrayOfRevision"/>
+     <element maxOccurs="1" minOccurs="0" name="linkedWorkItems" type="tns5:ArrayOfLinkedWorkItem"/>
+     <element maxOccurs="1" minOccurs="0" name="linkedWorkItemsDerived" type="tns5:ArrayOfLinkedWorkItem"/>
+     <element maxOccurs="1" minOccurs="0" name="location" type="tns4:Location"/>
+     <element maxOccurs="1" minOccurs="0" name="moduleURI" type="tns4:SubterraURI"/>
+     <element maxOccurs="1" minOccurs="0" name="outlineNumber" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="plannedEnd" type="xsd:dateTime"/>
+     <element maxOccurs="1" minOccurs="0" name="plannedIn" type="tns6:ArrayOfPlan"/>
+     <element maxOccurs="1" minOccurs="0" name="plannedStart" type="xsd:dateTime"/>
+     <element maxOccurs="1" minOccurs="0" name="planningConstraints" type="tns5:ArrayOfPlanningConstraint"/>
+     <element maxOccurs="1" minOccurs="0" name="previousStatus" type="tns5:EnumOptionId"/>
+     <element maxOccurs="1" minOccurs="0" name="priority" type="tns5:PriorityOptionId"/>
+     <element maxOccurs="1" minOccurs="0" name="project" type="tns3:Project"/>
+     <element maxOccurs="1" minOccurs="0" name="remainingEstimate" type="tns4:duration"/>
+     <element maxOccurs="1" minOccurs="0" name="resolution" type="tns5:EnumOptionId"/>
+     <element maxOccurs="1" minOccurs="0" name="resolvedOn" type="xsd:dateTime"/>
+     <element maxOccurs="1" minOccurs="0" name="severity" type="tns5:EnumOptionId"/>
+     <element maxOccurs="1" minOccurs="0" name="status" type="tns5:EnumOptionId"/>
+     <element maxOccurs="1" minOccurs="0" name="timePoint" type="tns5:TimePoint"/>
+     <element maxOccurs="1" minOccurs="0" name="timeSpent" type="tns4:duration"/>
+     <element maxOccurs="1" minOccurs="0" name="title" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="type" type="tns5:EnumOptionId"/>
+     <element maxOccurs="1" minOccurs="0" name="updated" type="xsd:dateTime"/>
+     <element maxOccurs="1" minOccurs="0" name="workRecords" type="tns5:ArrayOfWorkRecord"/>
+     <element maxOccurs="1" minOccurs="0" name="customFields" type="tns5:ArrayOfCustom"/>
+    </sequence>
+    <attribute name="uri" type="tns4:SubterraURI"/>
+    <attribute name="unresolvable" type="xsd:boolean"/>
+   </complexType>
+   <complexType name="ArrayOfPriorityOptionId">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="PriorityOptionId" type="tns5:PriorityOptionId"/>
+    </sequence>
+   </complexType>
+   <complexType name="EnumOption">
+    <sequence>
+     <element name="default" type="xsd:boolean"/>
+     <element name="enumId" nillable="true" type="xsd:string"/>
+     <element name="hidden" type="xsd:boolean"/>
+     <element name="id" nillable="true" type="xsd:string"/>
+     <element name="name" nillable="true" type="xsd:string"/>
+     <element name="phantom" type="xsd:boolean"/>
+     <element name="properties" nillable="true" type="tns4:Properties"/>
+     <element name="sequenceNumber" type="xsd:int"/>
+    </sequence>
+   </complexType>
+   <complexType name="PriorityOpt">
+    <complexContent>
+     <extension base="tns5:EnumOption">
+      <sequence>
+       <element name="float" type="xsd:float"/>
+      </sequence>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="CustomFieldType">
+    <sequence>
+     <element name="defaultValue" nillable="true" type="xsd:anyType"/>
+     <element name="dependsOn" nillable="true" type="xsd:string"/>
+     <element name="description" nillable="true" type="xsd:string"/>
+     <element name="id" nillable="true" type="xsd:string"/>
+     <element name="multi" type="xsd:boolean"/>
+     <element name="name" nillable="true" type="xsd:string"/>
+     <element name="required" type="xsd:boolean"/>
+     <element name="type" nillable="true" type="xsd:QName"/>
+    </sequence>
+   </complexType>
+   <complexType name="EnumCustomFieldType">
+    <complexContent>
+     <extension base="tns5:CustomFieldType">
+      <sequence>
+       <element name="enumId" nillable="true" type="xsd:string"/>
+      </sequence>
+     </extension>
+    </complexContent>
+   </complexType>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://ws.polarion.com/PlanningWebService-types" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://ws.polarion.com/TrackerWebService-types"/>
+   <import namespace="http://ws.polarion.com/ProjectWebService-types"/>
+   <import namespace="http://ws.polarion.com/BuilderWebService-types"/>
+   <import namespace="http://ws.polarion.com/types"/>
+   <complexType name="PlanRecord">
+    <sequence>
+     <element maxOccurs="1" minOccurs="0" name="item" type="tns5:WorkItem"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOfPlanRecord">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="PlanRecord" type="tns6:PlanRecord"/>
+    </sequence>
+   </complexType>
+   <complexType name="Plan">
+    <sequence>
+     <element maxOccurs="1" minOccurs="0" name="allowedTypes" type="tns5:ArrayOfEnumOptionId"/>
+     <element maxOccurs="1" minOccurs="0" name="authorURI" type="tns4:SubterraURI"/>
+     <element maxOccurs="1" minOccurs="0" name="calculationType" type="tns5:EnumOptionId"/>
+     <element maxOccurs="1" minOccurs="0" name="capacity" type="xsd:float"/>
+     <element maxOccurs="1" minOccurs="0" name="color" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="created" type="xsd:dateTime"/>
+     <element maxOccurs="1" minOccurs="0" name="defaultEstimate" type="xsd:float"/>
+     <element maxOccurs="1" minOccurs="0" name="description" type="tns4:Text"/>
+     <element maxOccurs="1" minOccurs="0" name="dueDate" type="xsd:date"/>
+     <element maxOccurs="1" minOccurs="0" name="estimationField" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="finishedOn" type="xsd:dateTime"/>
+     <element maxOccurs="1" minOccurs="0" name="homePageContent" type="tns4:Text"/>
+     <element maxOccurs="1" minOccurs="0" name="id" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="isTemplate" type="xsd:boolean"/>
+     <element maxOccurs="1" minOccurs="0" name="location" type="tns4:Location"/>
+     <element maxOccurs="1" minOccurs="0" name="name" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="parent" type="tns6:Plan"/>
+     <element maxOccurs="1" minOccurs="0" name="previousTimeSpent" type="tns4:duration"/>
+     <element maxOccurs="1" minOccurs="0" name="prioritizationField" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="projectURI" type="tns4:SubterraURI"/>
+     <element maxOccurs="1" minOccurs="0" name="projectSpanURIs" type="tns4:ArrayOfSubterraURI"/>
+     <element maxOccurs="1" minOccurs="0" name="records" type="tns6:ArrayOfPlanRecord"/>
+     <element maxOccurs="1" minOccurs="0" name="sortOrder" type="xsd:int"/>
+     <element maxOccurs="1" minOccurs="0" name="startDate" type="xsd:date"/>
+     <element maxOccurs="1" minOccurs="0" name="startedOn" type="xsd:dateTime"/>
+     <element maxOccurs="1" minOccurs="0" name="status" type="tns5:EnumOptionId"/>
+     <element maxOccurs="1" minOccurs="0" name="templateURI" type="tns4:SubterraURI"/>
+     <element maxOccurs="1" minOccurs="0" name="updated" type="xsd:dateTime"/>
+     <element maxOccurs="1" minOccurs="0" name="useReportFromTemplate" type="xsd:boolean"/>
+     <element maxOccurs="1" minOccurs="0" name="customFields" type="tns5:ArrayOfCustom"/>
+    </sequence>
+    <attribute name="uri" type="tns4:SubterraURI"/>
+    <attribute name="unresolvable" type="xsd:boolean"/>
+   </complexType>
+   <complexType name="ArrayOfPlan">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="Plan" type="tns6:Plan"/>
+    </sequence>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="getAllBuildsRequest">
+
+      <wsdl:part element="tns1:getAllBuilds" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getBuildsResponse">
+
+      <wsdl:part element="tns1:getBuildsResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAllBuildsResponse">
+
+      <wsdl:part element="tns1:getAllBuildsResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getBuildsRequest">
+
+      <wsdl:part element="tns1:getBuilds" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="queryBuildsResponse">
+
+      <wsdl:part element="tns1:queryBuildsResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="queryBuildsRequest">
+
+      <wsdl:part element="tns1:queryBuilds" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:portType name="BuilderWebService">
+
+      <wsdl:operation name="getAllBuilds">
+
+   <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Gets all builds from Polarion
+@since 3.3   </wsdl:documentation>
+
+         <wsdl:input message="impl:getAllBuildsRequest" name="getAllBuildsRequest"/>
+
+         <wsdl:output message="impl:getAllBuildsResponse" name="getAllBuildsResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getBuilds">
+
+   <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Gets a build.
+@param project the project of the builds to get.
+@since 3.3   </wsdl:documentation>
+
+         <wsdl:input message="impl:getBuildsRequest" name="getBuildsRequest"/>
+
+         <wsdl:output message="impl:getBuildsResponse" name="getBuildsResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="queryBuilds">
+
+   <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Query for build.
+@param project where query to be used.
+@param query the lucene query to be used.
+@param sort the field to be used for sorting.
+@since 3.3   </wsdl:documentation>
+
+         <wsdl:input message="impl:queryBuildsRequest" name="queryBuildsRequest"/>
+
+         <wsdl:output message="impl:queryBuildsResponse" name="queryBuildsResponse"/>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="BuilderWebServiceSoapBinding" type="impl:BuilderWebService">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="getAllBuilds">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getAllBuildsRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getAllBuildsResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getBuilds">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getBuildsRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getBuildsResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="queryBuilds">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="queryBuildsRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="queryBuildsResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="BuilderWebServiceService">
+
+  <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+
+      This service provides build related functionality.
+		  </wsdl:documentation>
+
+      <wsdl:port binding="impl:BuilderWebServiceSoapBinding" name="BuilderWebService">
+
+         <wsdlsoap:address location="https://almdemo.polarion.com/polarion/ws/services/BuilderWebService"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>
